@@ -1,3 +1,2 @@
 # comp3021lab
-
-Vincent NG, 20865925
+Wai Shing NG, 20865925
