@@ -2,8 +2,9 @@ package base;
 //1. Provided Equal function prototype not match???
 //2 Provdied Equal function in test case doesn't checl super class???
 //3 Match expected output then fine
+import java.util.Collections;
 import java.util.Date;
-public class Note {
+public class Note implements Comparable<Note>{
     private Date date;
     private String title;
 
@@ -24,5 +25,16 @@ public class Note {
         Note note = (Note) o;
 
         return title.equals(note.title);
+    }
+
+    @Override
+    public int compareTo(Note o) {
+        int result = (this.date).compareTo(o.date);
+        return result*-1;
+    }
+
+    @Override
+    public String toString() {
+        return date.toString() + "\t" + title;
     }
 }
