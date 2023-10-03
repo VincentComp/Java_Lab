@@ -62,13 +62,12 @@ public class Folder implements Comparable<Folder>{
     //Helper function
     public static boolean check(String msg, String keywords){
 
-
-        String[] result = keywords.toLowerCase().replace(" or ","@").split(" ");
+        String[] result = keywords.toLowerCase().replace(" or ","@").split(" "); //"Key1 or Key2 or Key3 Key4" --> "Key1@Key2@Key3 Key4"
 
         for(String s: result){
             boolean Not_found= true;
 
-            for(String inner_s: s.split("@")){
+            for(String inner_s: s.split("@")){                  //[ [Key1,Key2,Key3] [Key4]] --> get one is fine
                 if(msg.toLowerCase().indexOf(inner_s) == -1){
                     continue;
                 }else{
@@ -95,7 +94,7 @@ public class Folder implements Comparable<Folder>{
                     list.add(n);
                 }
             } else if (n instanceof TextNote) {
-                if(check(n.getTitle(),keywords) || check(((TextNote) n).getContent(),keywords)){
+                if(check(n.getTitle() + " " +((TextNote) n).getContent(),keywords)){ //Search Title & content at the same time
                     list.add(n);
                 }
             }

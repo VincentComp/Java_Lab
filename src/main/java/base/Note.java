@@ -1,7 +1,5 @@
 package base;
-//1. Provided Equal function prototype not match???
-//2 Provdied Equal function in test case doesn't checl super class???
-//3 Match expected output then fine
+
 import java.util.Collections;
 import java.util.Date;
 public class Note implements Comparable<Note>{
@@ -28,10 +26,20 @@ public class Note implements Comparable<Note>{
     }
 
     @Override
+    public int compareTo(Note o){
+
+        if(this instanceof TextNote && o instanceof ImageNote)
+            return -1; //Text note first
+        if(this instanceof ImageNote && o instanceof  TextNote)
+            return 1;
+        return title.compareTo(o.title); //Otherwise compare the title
+    }
+
+    /*@Override
     public int compareTo(Note o) {
         int result = (this.date).compareTo(o.date);
         return result*-1;
-    }
+    }*/
 
     @Override
     public String toString() {
