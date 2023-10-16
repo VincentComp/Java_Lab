@@ -2,7 +2,7 @@ package base;
 
 import java.io.*;
 
-public class TextNote extends Note{
+public class TextNote extends Note implements Iconifiable{
     private String content;
 
     public TextNote(String title) {
@@ -61,6 +61,24 @@ public class TextNote extends Note{
         }catch(IOException e){
             e.printStackTrace();
         }
+
+    }
+
+    @Override
+    public void iconify() {
+        char firstCharacter = content.charAt(0);
+        if('a' <= firstCharacter && firstCharacter <='z') {
+            content = new IconLowerCase(firstCharacter).base + content.substring(1); //why can't directly assign
+        }else if('A' <= firstCharacter && firstCharacter <='Z'){
+            content = new IconUpperCase(firstCharacter).base + content.substring(1);
+        }else if('0' <= firstCharacter && firstCharacter <='9'){
+            content = new IconDigit(firstCharacter).base + content.substring(1);
+        }
+    }
+
+    public TextNote(TextNote note){
+        super(note);
+        this.content = note.content;
 
     }
 }

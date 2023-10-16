@@ -45,4 +45,9 @@ public class Note implements Comparable<Note>, java.io.Serializable{
     public String toString() {
         return date.toString() + "\t" + title;
     }
+
+    public Note(Note note){
+        this.title = note.title;
+        this.date = note.date;
+    }
 }

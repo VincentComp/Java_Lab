@@ -1,11 +1,13 @@
 package base;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class Folder implements Comparable<Folder>, java.io.Serializable{
+public class Folder implements Comparable<Folder>, java.io.Serializable, Cloneable {
     private ArrayList<Note> notes;
     private String name;
 
@@ -103,6 +105,22 @@ public class Folder implements Comparable<Folder>, java.io.Serializable{
 
         return list;
 
+    }
 
+    @Override
+    public Folder clone(){
+        try{
+            Folder clone = (Folder)super.clone();
+            clone.notes = new ArrayList<>();//File.notes -> [][][][][][] <- clone.notes
+            for(int i = 0; i < notes.size(); i++){
+                if(notes.get(i) instanceof TextNote)
+                    clone.notes.add(i,new TextNote((TextNote) notes.get(i)));
+                else
+                    clone.notes.add(i,new ImageNote((ImageNote)notes.get(i)));
+            }
+            return clone;
+        }catch(CloneNotSupportedException e){
+            throw new AssertionError();
+        }
     }
 }
