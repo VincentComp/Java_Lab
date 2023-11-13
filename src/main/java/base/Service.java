@@ -2,11 +2,6 @@ package base;
 import java.time.Duration;
 import java.util.*;
 
-/*
-self use
-eventEmitter: node
-addListener(): SetOnSth
-* */
 
 public class Service implements EventEmitter {
     private final List<Listener> listeners = new ArrayList<>();
@@ -28,7 +23,7 @@ public class Service implements EventEmitter {
         for(Listener listener: listeners){
             listener.handle(event);
         }
-    }
+    } //listener are forced to listen
 
     /**
      * TODO 2: Complete the method startTick
@@ -47,10 +42,10 @@ public class Service implements EventEmitter {
 
         timer.schedule(new TimerTask() {
             public void run() {
-                Event event = new Event(new Date()); //source
+                Event event = new Event(new Date());
                 emitEvent(event);
             }
-        }, new Date(), interval.toMillis()); //run now within the interval
+        }, new Date(), interval.toMillis()); //keep force listener to receive the event
     }
 
     /**
@@ -66,3 +61,68 @@ public class Service implements EventEmitter {
         }
     }
 }
+
+
+
+/*
+self use
+Listener: interface to call handle(Event) -> every listener handle the same event
+Event: store Date as source
+
+============================================================================
+
+
+package base;
+import java.time.Duration;
+import java.util.*;
+
+interface Listener extends EventListener {
+    void handle(Event event);
+}
+
+class Event extends EventObject{
+    public Event(Object source) {
+        super(source);
+    }
+}
+
+public class Temp {
+
+    public static void main(String[] args) {
+
+        ArrayList<Listener> listeners = new ArrayList();
+        Listener l1 = new Listener() {
+            @Override
+            public void handle(Event event) {
+                System.out.println("L1: " + event.getSource());
+            }
+        };
+        Listener l2 = event-> System.out.println("L2: " + event.getSource());
+        listeners.add(l1);
+        listeners.add(l2);
+
+        //================//
+
+
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                for(Listener listener: listeners){
+                    listener.handle(new Event(new Date()));
+                }
+            }
+        },new Date(), 1000);
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel();
+            }
+        }, 3000);
+
+    }
+}
+
+*/
