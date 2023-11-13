@@ -41,10 +41,10 @@ public class Account {
 	// implements make(int N) to return a lambda expression
 	// TODO
 	public interface AddMaker{
-		Consumer <Account> make(int N);
+		Consumer <Account> make(int N); ///int -> Consumer <Account>
 	}
 	// TODO
-	public static AddMaker maker = N->account->account.balance+=N;
+	public static AddMaker maker = N->(account->account.balance+=N);
 
 
 
