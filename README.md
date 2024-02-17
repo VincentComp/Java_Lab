@@ -1,15 +1,15 @@
 # Overview
 This repository contains the project for COMP3021 - Java Programming, which includes the concepts of
 
-* language syntax, 
-object-oriented programming, 
-inheritance, 
-polymorphism, 
-exception handling, 
-multithreading and lambdas. 
-Standard libraries for input/output, 
-graphics programming, 
-built-in data structures. 
-Programming for events, 
-generics
-higher-order functions.
+* Java language syntax 
+* Object-oriented programming
+* Inheritance
+* Polymorphism
+* Exception handling
+* Multithreading and Lambdas
+* Standard libraries for input/output
+* Graphics programming
+* Built-in data structures 
+* Programming for events handling
+* Generics
+* Higher-order functions
